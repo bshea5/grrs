@@ -2,7 +2,7 @@
 
 [x] What happens when the file doesn’t exist?
 [x] What is the output when there is no match?
-[ ] Does our program exit with an error when we forget one (or both) arguments?
+[x] Does our program exit with an error when we forget one (or both) arguments?
 [x] Happy path
 */
 
@@ -27,6 +27,17 @@ fn file_doesnt_exist() -> Result<(), Box<dyn Error>> {
 fn no_arguments() -> Result<(), Box<dyn Error>> {
     let mut cmd = Command::cargo_bin("grrs")?;
 
+    cmd.assert().failure()
+        .stderr(predicate::str::contains("The following required arguments were not provided:"));
+
+    Ok(())
+}
+
+#[test]
+fn one_argument() -> Result<(), Box<dyn Error>> {
+    let mut cmd = Command::cargo_bin("grrs")?;
+
+    cmd.arg("");
     cmd.assert().failure()
         .stderr(predicate::str::contains("The following required arguments were not provided:"));
 
