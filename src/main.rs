@@ -24,7 +24,7 @@ fn main() -> Result<()> {
     let reader = BufReader::new(file);
     let content = reader.lines();
 
-    grrs::find_matches(content, pattern, &mut std::io::stdout());
+    shea_grrs::find_matches(content, pattern, &mut std::io::stdout());
 
     Ok(())
 }

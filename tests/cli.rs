@@ -14,7 +14,7 @@ use std::error::Error;
 
 #[test]
 fn file_doesnt_exist() -> Result<(), Box<dyn Error>> {
-    let mut cmd = Command::cargo_bin("grrs")?;
+    let mut cmd = Command::cargo_bin("shea_grrs")?;
 
     cmd.arg("foobar").arg("test/file/doesnt/exist");
     cmd.assert().failure()
@@ -25,7 +25,7 @@ fn file_doesnt_exist() -> Result<(), Box<dyn Error>> {
 
 #[test]
 fn no_arguments() -> Result<(), Box<dyn Error>> {
-    let mut cmd = Command::cargo_bin("grrs")?;
+    let mut cmd = Command::cargo_bin("shea_grrs")?;
 
     cmd.assert().failure()
         .stderr(predicate::str::contains("The following required arguments were not provided:"));
@@ -35,7 +35,7 @@ fn no_arguments() -> Result<(), Box<dyn Error>> {
 
 #[test]
 fn one_argument() -> Result<(), Box<dyn Error>> {
-    let mut cmd = Command::cargo_bin("grrs")?;
+    let mut cmd = Command::cargo_bin("shea_grrs")?;
 
     cmd.arg("");
     cmd.assert().failure()
@@ -46,7 +46,7 @@ fn one_argument() -> Result<(), Box<dyn Error>> {
 
 #[test]
 fn pattern_is_empty_string() -> Result<(), Box<dyn Error>> {
-    let mut cmd = Command::cargo_bin("grrs")?;
+    let mut cmd = Command::cargo_bin("shea_grrs")?;
     let file = create_sample_file()?;
 
     cmd.arg("").arg(file.path());
@@ -58,7 +58,7 @@ fn pattern_is_empty_string() -> Result<(), Box<dyn Error>> {
 
 #[test]
 fn find_content_in_file() -> Result<(), Box<dyn Error>> {
-    let mut cmd = Command::cargo_bin("grrs")?;
+    let mut cmd = Command::cargo_bin("shea_grrs")?;
     let file = create_sample_file()?;
 
     cmd.arg("test").arg(file.path());
